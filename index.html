@@ -219,19 +219,24 @@
     // **كود SDK الخاص بتطبيق Telegram Mini App**
     function initializeTelegramApp() {
         // التحقق مما إذا كانت مكتبة Telegram WebApp متاحة
-        if (window.Telegram && window.Telegram.WebApp) {
-            const WebApp = window.Telegram.WebApp;
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            const WebApp = Telegram.WebApp;
 
             // 1. إخبار Telegram بأن التطبيق جاهز
             WebApp.ready();
             
             // 2. إجبار التطبيق على وضع ملء الشاشة (Full Screen)
-            // هذا يخفي شريط العنوان العلوي وأزرار التحكم السفلية إن أمكن.
-            // هذه الوظيفة هي التي تضمن أن التطبيق يملأ الشاشة بالكامل.
-            WebApp.expand();
-
+            // هذه هي الوظيفة الأساسية لملء الشاشة في متصفح Telegram
+            WebApp.expand(); 
+            
+            // إضافة آلية احتياطية (كما كانت في الكود الثاني)
+            if (WebApp.requestFullscreen) {
+                 WebApp.requestFullscreen();
+            } else {
+                 console.warn("requestFullscreen is not available in this Telegram WebApp version.");
+            }
+            
             // 3. تعيين ألوان الخلفية لضمان التكامل مع تصميم الصفحة السوداء
-            // استخدام 'bg_color' الافتراضية للون الأساسي
             WebApp.setHeaderColor('bg_color'); 
             WebApp.setBackgroundColor('bg_color'); 
 
