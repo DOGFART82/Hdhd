@@ -6,6 +6,10 @@
   <title>صفحة تحميل SIGMA PRO 3.72</title>
   <!-- إضافة خط Inter لتحسين المظهر -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- **إضافة Telegram WebApp SDK لتمكين وظائف Mini App** -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
   <style>
     /* الخلفية السوداء تغطي الشاشة كاملة */
     body, html {
@@ -211,7 +215,35 @@
   </div>
 
   <script>
-    // بعد 6 ثواني يتم التوجيه إلى dashboard.html تلقائيًا
+    // **كود SDK الخاص بتطبيق Telegram Mini App**
+    function initializeTelegramApp() {
+        // التحقق مما إذا كانت مكتبة Telegram WebApp متاحة
+        if (window.Telegram && window.Telegram.WebApp) {
+            const WebApp = window.Telegram.WebApp;
+
+            // 1. إخبار Telegram بأن التطبيق جاهز
+            WebApp.ready();
+            
+            // 2. إجبار التطبيق على وضع ملء الشاشة (Full Screen)
+            // هذا يخفي شريط العنوان العلوي وأزرار التحكم السفلية إن أمكن.
+            WebApp.expand();
+
+            // 3. تعيين ألوان الخلفية لضمان التكامل مع تصميم الصفحة السوداء
+            // استخدام 'bg_color' الافتراضية للون الأساسي
+            WebApp.setHeaderColor('bg_color'); 
+            WebApp.setBackgroundColor('bg_color'); 
+
+            console.log('Telegram Mini App initialized and expanded to full screen.');
+
+        } else {
+            console.log('Telegram WebApp SDK not found. Running in standard browser mode.');
+        }
+    }
+
+    // تشغيل التهيئة فوراً
+    initializeTelegramApp();
+
+    // بعد 6 ثواني يتم التوجيه إلى dash.html تلقائيًا
     setTimeout(() => {
       window.location.href = 'dash.html';
     }, 6000);
