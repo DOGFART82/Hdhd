@@ -2,68 +2,63 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>صفحة تحميل SIGMA PRO 3.72</title>
-  <!-- تحميل واجهة برمجة تطبيقات تيليجرام للتطبيقات المصغرة (TWA API) للتحكم في واجهة المتصفح -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- إضافة خط Inter لتحسين المظهر -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /*
-      ** ملاحظة حول تصميم تيليجرام:
-      لا يمكن إخفاء شريط العنوان الخاص بمتصفح تيليجرام بالكامل (الذي يحتوي على اسم المحادثة).
-      للحصول على أفضل مظهر "ملء الشاشة"، يتم تعيين لون الخلفية ولون الشريط العلوي إلى الأسود (#000000) لدمجهما.
-    */
+    /* الخلفية السوداء تغطي الشاشة كاملة */
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
-      /* تعيين خلفية سوداء صلبة */
-      background-color: #000000;
+      background-color: black;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      font-family: 'Inter', Arial, sans-serif;
+      /* استخدام خط Inter */
+      font-family: 'Inter', Arial, sans-serif; 
       color: white;
       text-align: center;
     }
     
-    /* حاوية النص */
+    /* حاوية النص والصورة */
     .header {
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 15px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+    }
+    
+    .header img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      border-radius: 6px; /* إضافة حواف مستديرة للرمز */
     }
     
     .header h1 {
-      font-size: clamp(1.5rem, 5vw, 2.5rem); /* خط متجاوب */
+      font-size: 2rem;
       margin: 0;
-      font-weight: 700;
-      letter-spacing: 1px;
+      font-weight: bold;
     }
     
-    /* كود اللودر المقتبس والمحسن قليلاً */
+    /* كود اللودر (مقتبس من كودك) */
     .ui-abstergo {
-      --primary: #fff;
-      --secondary: rgba(255, 255, 255, 0.3);
-      --shadow-blur: 5px; /* زيادة التوهج */
-      --text-shadow-blur: 3px;
+      /* تعديل الألوان لتبدو أكثر عصرية ونيون */
+      --primary: #00FFC2; /* تركواز نيون */
+      --secondary: rgba(0, 255, 194, 0.4);
+      --shadow-blur: 5px;
+      --text-shadow-blur: 8px;
       --animation-duration: 2s;
-      --size: 1.2; /* تكبير بسيط للعرض على الجوال */
+      --size: 1.1; /* تكبير بسيط */
       
       display: flex;
       flex-direction: column;
       align-items: center;
       row-gap: 30px;
       scale: var(--size);
-      /* تحريك بسيط عند التحميل */
-      animation: pulse-shadow 4s ease-in-out infinite alternate;
-    }
-
-    @keyframes pulse-shadow {
-        0% { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1)); }
-        100% { filter: drop_shadow(0 0 20px rgba(255, 255, 255, 0.3)); }
     }
 
     .abstergo-loader * {
@@ -73,19 +68,21 @@
     .ui-abstergo .ui-text {
       color: var(--primary);
       text-shadow: 0 0 var(--text-shadow-blur) var(--secondary);
-      font-family: Menlo, monospace;
+      /* استخدام خط Menlo أو ما شابهه ليتناسب مع المظهر التكنولوجي */
+      font-family: Menlo, monospace; 
       display: flex;
       align-items: baseline;
       column-gap: 3px;
-      font-size: 1.2rem;
-      direction: ltr; /* النص بالإنجليزية */
+      font-size: 1.4rem;
+      /* التأكد من أن النص يبدأ من اليسار لليمين لإظهار الـ dots بعد كلمة Synchronization */
+      direction: ltr; 
     }
 
     .ui-abstergo .ui-dot {
       content: "";
       display: block;
-      width: 3px;
-      height: 3px;
+      width: 4px;
+      height: 4px;
       animation: dots var(--animation-duration) infinite linear;
       animation-delay: .4s;
       background-color: var(--primary);
@@ -119,7 +116,6 @@
       filter: drop-shadow(0 0 var(--shadow-blur) var(--secondary));
     }
 
-    /* حركات اللودر كما هي */
     .abstergo-loader div:nth-child(1) {
       top: 27px;
       left: 7px;
@@ -142,30 +138,62 @@
     }
 
     @keyframes line1 {
-      0%, 40% { top: 27px; left: 7px; rotate: -60deg; }
-      60%, 100% { top: 22px; left: 14px; rotate: 60deg; }
+      0%, 40% {
+        top: 27px;
+        left: 7px;
+        rotate: -60deg;
+      }
+      60%, 100% {
+        top: 22px;
+        left: 14px;
+        rotate: 60deg;
+      }
     }
 
     @keyframes line2 {
-      0%, 40% { bottom: 2px; left: 0; rotate: 180deg; }
-      60%, 100% { bottom: 5px; left: -8px; rotate: 300deg; }
+      0%, 40% {
+        bottom: 2px;
+        left: 0;
+        rotate: 180deg;
+      }
+      60%, 100% {
+        bottom: 5px;
+        left: -8px;
+        rotate: 300deg;
+      }
     }
 
     @keyframes line3 {
-      0%, 40% { bottom: 16px; right: -9px; rotate: 60deg; }
-      60%, 100% { bottom: 7px; right: -11px; rotate: 180deg; }
+      0%, 40% {
+        bottom: 16px;
+        right: -9px;
+        rotate: 60deg;
+      }
+      60%, 100% {
+        bottom: 7px;
+        right: -11px;
+        rotate: 180deg;
+      }
     }
 
     @keyframes dots {
-      0% { background-color: var(--secondary); }
-      30% { background-color: var(--primary); }
-      70%, 100% { background-color: var(--secondary); }
+      0% {
+        background-color: var(--secondary);
+      }
+      30% {
+        background-color: var(--primary);
+      }
+      70%, 100% {
+        background-color: var(--secondary);
+      }
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>SIGMA PRO 3.72</h1>
+    <!-- استخدام صورة رمزية (Placeholder) بيضاء بدلاً من ملف محلي غير متوفر -->
+   
+    <h1></h1>
   </div>
 
   <div class="ui-abstergo">
@@ -183,34 +211,10 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // تهيئة واجهة تيليجرام API والتحكم في عناصر المتصفح
-        if (window.Telegram && window.Telegram.WebApp) {
-            const WebApp = window.Telegram.WebApp;
-
-            // 1. إخفاء الزر الرئيسي (MainButton) لإزالة الأزرار السفلية
-            WebApp.ready();
-            WebApp.MainButton.hide();
-
-            // 2. تعيين لون شريط العنوان إلى الأسود (#000000) لدمجه مع الخلفية
-            WebApp.setHeaderColor('#000000');
-            // تعيين لون الخلفية للتطبيق لضمان التناسق
-            WebApp.setBackgroundColor('#000000');
-
-            // 3. طلب عرض التطبيق بملء الشاشة قدر الإمكان
-            WebApp.expand();
-
-            console.log("Telegram WebApp Initialized for full-screen view.");
-        } else {
-            console.log("Not running inside Telegram WebApp or API is not available.");
-        }
-
-        // بعد 6 ثواني يتم التوجيه إلى dashboard.html تلقائيًا
-        setTimeout(() => {
-          // التوجيه إلى dashboard.html
-          window.location.href = 'dashboard.html';
-        }, 6000);
-    });
+    // بعد 6 ثواني يتم التوجيه إلى dashboard.html تلقائيًا
+    setTimeout(() => {
+      window.location.href = 'dash.html';
+    }, 6000);
   </script>
 </body>
 </html>

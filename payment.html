@@ -3,108 +3,160 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Payment Methods</title>
+  <title>Choose Payment Method</title>
+  <!-- استخدام خط Inter لمظهر عصري -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --neon-color: #00ffc8; /* اللون النيوني الأساسي */
+      --bg-dark: #0A0A0A;
+      --card-bg: rgba(20, 20, 30, 0.95);
+    }
     * {
       margin: 0; padding: 0; box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
     }
 
     body {
-      background-color: #0d0d0d;
+      background-color: var(--bg-dark);
       color: white;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 30px 20px;
+      position: relative;
+      overflow: hidden;
     }
 
+    /* تأثير الخطوط المضيئة في الخلفية */
+    .background-lines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%; 
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(0, 255, 200, 0.08) 10%, 
+            rgba(0, 255, 200, 0.15) 20%, 
+            rgba(0, 255, 200, 0.08) 30%,
+            rgba(255, 255, 255, 0) 40%
+        );
+        background-size: 80% 100%;
+        animation: moveLines 15s linear infinite;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    @keyframes moveLines {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    /* تنسيق الحاوية الرئيسية */
     .container {
-      background-color: #1a1a1a;
+      position: relative;
+      z-index: 1;
+      background: var(--card-bg);
       border-radius: 20px;
-      padding: 25px;
-      max-width: 400px;
+      padding: 30px; /* زيادة البادينغ */
+      max-width: 450px; /* حجم مناسب للهاتف */
       width: 100%;
-      box-shadow: 0 0 15px #00ff88;
+      box-shadow: 0 0 25px var(--neon-color), inset 0 0 5px var(--neon-color);
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 25px; /* زيادة المسافة بين العناصر */
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 10px;
-      color: #00ff88;
-      text-shadow: 0 0 6px #00ff88;
+      margin-bottom: 5px;
+      font-size: 1.6rem; /* تكبير العنوان */
+      color: var(--neon-color);
+      text-shadow: 0 0 10px rgba(0, 255, 200, 0.8);
     }
 
     .method {
-      padding: 12px 15px;
-      border-radius: 15px;
+      padding: 15px 20px; /* زيادة البادينغ الداخلي للزر */
+      border-radius: 18px;
       background-color: #111;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
+      font-size: 1.1rem; /* تكبير الخط */
+      font-weight: 700;
       display: flex;
       align-items: center;
       cursor: pointer;
-      transition: 0.3s ease;
-      box-shadow: 0 0 8px rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+      letter-spacing: 0.05em;
     }
 
     .method:hover {
-      transform: scale(1.02);
+      transform: scale(1.03);
+      background-color: #1c1c1c;
     }
 
     .method img {
-      width: 30px;
-      height: 30px;
-      margin-right: 12px;
+      width: 35px; /* تكبير الأيقونات */
+      height: 35px;
+      margin-right: 15px;
+      border-radius: 8px; /* حواف مستديرة للأيقونات */
     }
 
+    /* تنسيق الحواف النيون لكل طريقة دفع */
     .trx {
       border: 2px solid #ff4444;
-      box-shadow: 0 0 10px #ff4444aa;
+      box-shadow: 0 0 15px #ff4444, inset 0 0 5px #ff4444;
     }
 
     .ton {
       border: 2px solid #3399ff;
-      box-shadow: 0 0 10px #3399ffaa;
+      box-shadow: 0 0 15px #3399ff, inset 0 0 5px #3399ff;
     }
 
     .usdt {
       border: 2px solid #44ff44;
-      box-shadow: 0 0 10px #44ff44aa;
+      box-shadow: 0 0 15px #44ff44, inset 0 0 5px #44ff44;
     }
 
     .card {
       border: 2px solid #ffcc00;
-      box-shadow: 0 0 10px #ffcc00aa;
+      box-shadow: 0 0 15px #ffcc00, inset 0 0 5px #ffcc00;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <!-- الخلفية المتحركة -->
+  <div class="background-lines"></div>
+
+  <div class="container" role="main" aria-label="Payment method selection">
     <h2>Choose Your Payment Method</h2>
 
-    <div class="method trx" onclick="location.href='trx.html'">
-      <img src="paypal.png" alt="TRX"> Pay with TRX
+    <!-- TRX - أحمر ناري -->
+    <div class="method trx" onclick="location.href='trx.html'" role="button" tabindex="0">
+      <img src="trx.png" alt="TRX Icon"> Pay with TRX
     </div>
 
-    <div class="method ton" onclick="location.href='ton.html'">
-      <img src="btc.png" alt="TON"> Pay with TON
+    <!-- TON - أزرق سماوي -->
+    <div class="method ton" onclick="location.href='ton.html'" role="button" tabindex="0">
+      <img src="btc.png" alt="TON Icon"> Pay with TON
     </div>
 
-    <div class="method usdt" onclick="location.href='usdt.html'">
-      <img src="usdt.png" alt="USDT"> Pay with USDT
+    <!-- USDT - أخضر ساطع -->
+    <div class="method usdt" onclick="location.href='usdt.html'" role="button" tabindex="0">
+      <img src="usdt.png" alt="USDT Icon"> Pay with USDT
     </div>
 
-    <div class="method card" onclick="location.href='visa.html'">
-      <img src="visa.png" alt="Card"> Pay with Card
+    <!-- Card - ذهبي/أصفر تحذيري -->
+    <div class="method card" onclick="location.href='visa.html'" role="button" tabindex="0">
+      <img src="visa.png" alt="Card Icon"> Pay with Card
     </div>
   </div>
 
 </body>
 </html>
+
